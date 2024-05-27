@@ -5,7 +5,9 @@ VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Linq", "Linq.csproj", "{C75970DC-0938-4C60-A5E0-1A64B1A27E94}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EfConventionalRelationships", "..\EfConventionalRelationships\EfConventionalRelationships.csproj", "{A52019B7-A015-4C3F-BB06-61FD96527A16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EfConventionalRelationships", "..\EfConventionalRelationships\EfConventionalRelationships.csproj", "{A52019B7-A015-4C3F-BB06-61FD96527A16}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cqrs_MediatR_Implementation", "..\Cqrs_MeditrImplementation\Cqrs_MediatR_Implementation.csproj", "{6BCC53DA-C444-460C-8F6C-CCB85C62AFE6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{A52019B7-A015-4C3F-BB06-61FD96527A16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A52019B7-A015-4C3F-BB06-61FD96527A16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A52019B7-A015-4C3F-BB06-61FD96527A16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BCC53DA-C444-460C-8F6C-CCB85C62AFE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BCC53DA-C444-460C-8F6C-CCB85C62AFE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BCC53DA-C444-460C-8F6C-CCB85C62AFE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BCC53DA-C444-460C-8F6C-CCB85C62AFE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,2 +1,4 @@
 .vs/
 UserDB/UserDB.publish.xml
+*/bin
+*/obj

@@ -69,6 +69,7 @@ namespace EfConventionalRelationships.Controllers
         public async Task<IActionResult> GetBookWithDetails()
         {
             //var result = await _dbContext.Books.Include(u => u.Publisher).Include(u => u.bookAuthorMaps).ToListAsync();
+            //var result1 = await _dbContext.Books.Include(u => u.Publisher).Include(u => u.bookAuthorMaps).Include(u => u.BookDetail).ToListAsync();
             var result = await _dbContext.Books.Select(books => new BookUIVm()
             {
                 ISBN = books.ISBN,
@@ -89,10 +90,10 @@ namespace EfConventionalRelationships.Controllers
 
         [HttpDelete]
         [Route("delete-book")]
-        public async Task<IActionResult> DeleteBook([Required]int BookId)
+        public async Task<IActionResult> DeleteBook([Required] int BookId)
         {
             var _book = await _dbContext.Books.Where(book => book.BookId == BookId).FirstOrDefaultAsync();
-            if(_book is not null)
+            if (_book is not null)
             {
                 _dbContext.Books.Remove(_book);
                 await _dbContext.SaveChangesAsync();

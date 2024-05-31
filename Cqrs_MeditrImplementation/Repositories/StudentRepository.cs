@@ -19,6 +19,13 @@ namespace Cqrs_MeditrImplementation.Repositories
             await _dbContext.SaveChangesAsync();
             return result.Entity;
         }
+        
+        public async Task<bool> AddStudentAllAsync(List<StudentDetails> studentDetails)
+        {
+            await _dbContext.StudentsCqrs.AddRangeAsync(studentDetails);
+            await _dbContext.SaveChangesAsync();
+            return true;
+        }
 
         public async Task<int> DeleteStudentAsync(int Id)
         {
@@ -34,13 +41,21 @@ namespace Cqrs_MeditrImplementation.Repositories
 
         public async Task<List<StudentDetails>> GetStudentListAsync()
         {
-            return await _dbContext.StudentsCqrs.ToListAsync();
+            var result =  await _dbContext.StudentsCqrs.ToListAsync();
+            return result;
         }
 
         public async Task<int> UpdateStudentAsync(StudentDetails studentDetails)
         {
             _dbContext.StudentsCqrs.Update(studentDetails);
             return await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<bool> UpdateStudentListAsync(List<StudentDetails> studentDetails)
+        {
+            _dbContext.StudentsCqrs.UpdateRange(studentDetails);
+            await _dbContext.SaveChangesAsync();
+            return true;
         }
     }
 }

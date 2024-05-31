@@ -1,4 +1,5 @@
 ﻿using Cqrs_MediatR_Implementation.Commands;
+using Cqrs_MediatR_Implementation.Commands.Create;
 using Cqrs_MediatR_Implementation.Notifications;
 using Cqrs_MediatR_Implementation.ViewModels;
 using Cqrs_MeditrImplementation.Commands;
@@ -64,6 +65,29 @@ namespace Cqrs_MeditrImplementation.Controllers
         public async Task<int> AddStudentAsyncV3(CreateStudentCommandV3 createStudentCommandV3)
         {
             var studentDetail = await mediator.Send(createStudentCommandV3);
+            return studentDetail;
+        }
+        
+        [HttpPost]
+        [Route("CqrsWithListV4")]
+        public async Task<bool> AddStudentAsyncV4()
+        {
+            List<CreateStudentDTO> studentList = new List<CreateStudentDTO>();
+            for (int i = 0; i < 1000; i++)
+            {
+                CreateStudentDTO studentDTO = new CreateStudentDTO
+                {
+                    StudentName = "sajid",
+                    StudentAddress = "malibagh",
+                    StudentAge = 30,
+                    StudentEmail = "sajid.mahboob@gmail.com"
+                };
+                studentList.Add(studentDTO);
+            }
+            var studentDetail = await mediator.Send(new CreateStudentsCommandV4(studentList));
+
+            UpdateNotification updateNotification = new UpdateNotification();
+            mediator.Publish(updateNotification);
             return studentDetail;
         }
 

@@ -1,9 +1,36 @@
 using Cqrs_MeditrImplementation.Data;
 using Cqrs_MeditrImplementation.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
+using Serilog.Events;
+using Serilog.Sinks.MSSqlServer;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+// serilog configs
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+    // Filter out ASP.NET Core infrastructre logs that are Information and below
+    .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
+    .WriteTo.Console()
+    .WriteTo.File("logs/app.txt", rollingInterval: RollingInterval.Day)
+    .WriteTo.MSSqlServer("Data Source=LAPTOP-SOC2P5QG;Initial Catalog=EfRelationships;Trusted_Connection=True;TrustServerCertificate=True",
+                    new MSSqlServerSinkOptions
+                    {
+                        TableName = "SeriLogs",
+                        SchemaName = "dbo",
+                        AutoCreateSqlTable = true
+                    })
+    .WriteTo.Seq("http://localhost:5341")
+    .CreateLogger();
+builder.Logging.AddSerilog();
+
+builder.Services.AddSingleton(Log.Logger);
+
+// serilog configs
+
 
 // Add services to the container.
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));

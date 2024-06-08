@@ -8,3 +8,6 @@
 ## CQRS architechture Reference
 * https://codewithmukesh.com/blog/cqrs-and-mediatr-in-aspnet-core/
 * https://stefandjokic.tech/posts/how-to-use-mediatr-notifications-email
+
+## Structured logging using serilog
+* https://stefandjokic.tech/posts/structured-logging-with-serilog

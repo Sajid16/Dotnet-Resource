@@ -1,4 +1,5 @@
-﻿using Cqrs_MeditrImplementation.Models;
+﻿using Cqrs_MediatR_Implementation.Services;
+using Cqrs_MeditrImplementation.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,10 +10,12 @@ namespace Cqrs_MediatR_Implementation.Controllers
     public class MultiThreadsController : ControllerBase
     {
         private readonly Serilog.ILogger _logger;
+        private readonly IExternalApiCallService externalApiCallService;
 
-        public MultiThreadsController(Serilog.ILogger logger)
+        public MultiThreadsController(Serilog.ILogger logger, IExternalApiCallService externalApiCallService)
         {
             _logger = logger;
+            this.externalApiCallService = externalApiCallService;
         }
 
         [HttpGet]
@@ -65,7 +68,8 @@ namespace Cqrs_MediatR_Implementation.Controllers
                 {
                     foreach (var item in studentSubList)
                     {
-                        _logger.Information($"info is - {item.Id}:{item.StudentName}:{item.StudentAge} - Thread Index - {threadIndex}");
+                        //_logger.Information($"info is - {item.Id}:{item.StudentName}:{item.StudentAge} - Thread Index - {threadIndex}");
+                        externalApiCallService.ExternalApiCall(item.Id);
                     }
                 });
 

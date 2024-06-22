@@ -1,3 +1,4 @@
+using Cqrs_MediatR_Implementation.Services;
 using Cqrs_MeditrImplementation.Data;
 using Cqrs_MeditrImplementation.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -39,6 +40,7 @@ builder.Services.AddDbContext<DbContextClass>(options =>
          options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")),
          ServiceLifetime.Scoped);
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+builder.Services.AddScoped<IExternalApiCallService, ExternalApiCallService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

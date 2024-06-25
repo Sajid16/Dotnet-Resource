@@ -11,3 +11,7 @@
 
 ## Structured logging using serilog
 * https://stefandjokic.tech/posts/structured-logging-with-serilog
+
+## Generic repository with unit of work
+* https://codewithmukesh.com/blog/repository-pattern-in-aspnet-core/
+* https://stackoverflow.com/questions/66680043/ef-core-how-to-load-data-from-a-table-and-related-tables-in-generic-repository

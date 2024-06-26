@@ -11,6 +11,7 @@ namespace RepositoryPattern.Domain.Interfaces
     {
         T GetById(int id);
         IEnumerable<T> GetAll();
+        IQueryable<T> GetAllAsQueryable();
         IEnumerable<T> Find(Expression<Func<T, bool>> expression);
         void Add(T entity);
         void AddRange(IEnumerable<T> entities);

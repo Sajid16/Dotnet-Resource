@@ -38,5 +38,19 @@ namespace RepositoryPattern.WebApi.Controllers
             var books = _unitOfWork.Books.LoadAllWithRelatedAsync(p => p.Publisher, p => p.BookDetail, p => p.BookAuthorMaps);
             return Ok(books);
         }
+
+        [HttpGet]
+        [Route("Get-GenericV2")]
+        public IActionResult GetBooksV2()
+        {
+            var books = _unitOfWork.Books.GetAllAsQueryable().Select(books => new {
+                isbn = books.Isbn,
+                id = books.BookId,
+                price = books.Price,
+                publisherName = books.Publisher.Name,
+                authors = books.BookAuthorMaps.Select(map => map.Author.FirstName).ToList()
+            }).ToList();
+            return Ok(books);
+        }
     }
 }

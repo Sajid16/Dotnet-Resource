@@ -62,5 +62,10 @@ namespace RepositoryPattern.DataAccess.EfCore.Repositories
 
             return query.ToList();
         }
+
+        public IQueryable<T> GetAllAsQueryable()
+        {
+            return _context.Set<T>().AsQueryable();
+        }
     }
 }

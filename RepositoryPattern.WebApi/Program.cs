@@ -22,6 +22,7 @@ builder.Services.AddTransient(typeof(IGenericRepository<>), typeof(GenericReposi
 builder.Services.AddScoped(typeof(IGenericRepositoryV2<>), typeof(GenericRepositoryV2<>));
 builder.Services.AddTransient<IBookRepository, BookRepository>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IUnitOfWorkV2, UnitOfWorkV2>();
 #endregion
 
 #region cycle dependency resolver of json

@@ -11,7 +11,7 @@ namespace RepositoryPattern.DataAccess.EfCore.Repositories
     public class GenericRepositoryV2<TEntity> : IGenericRepositoryV2<TEntity> where TEntity : class
     {
         private readonly EfRelationshipsContext _context;
-        private readonly DbSet<TEntity> _dbSet;
+        protected readonly DbSet<TEntity> _dbSet;
 
         public GenericRepositoryV2(EfRelationshipsContext efRelationshipsContext)
         {

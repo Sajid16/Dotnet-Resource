@@ -31,6 +31,7 @@ namespace RepositoryPattern.Domain.ViewModels
         public decimal Price { get; set; }
         public int publisherId { get; set; }
         public List<int> authorIds { get; set; }
+        public BookDetailUiVM Details { get; set; }
     }
 
     public class BookVmUpdate

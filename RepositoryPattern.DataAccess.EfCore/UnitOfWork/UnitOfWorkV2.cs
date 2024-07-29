@@ -9,10 +9,16 @@ namespace RepositoryPattern.DataAccess.EfCore.UnitOfWork
         private readonly EfRelationshipsContext _context;
         private IDbContextTransaction _transaction;
         private readonly Dictionary<Type, object> _repositories;
+
+        // extended repository
+        public IBookRepositoryV2 BookRepository { get; }
+
         public UnitOfWorkV2(EfRelationshipsContext context)
         {
             _context = context;
             _repositories = new Dictionary<Type, object>();
+            // extended repository
+            BookRepository = new BookRepositoryV2(_context);
         }
         public async Task BeginTransactionAsync()
         {
@@ -58,6 +64,7 @@ namespace RepositoryPattern.DataAccess.EfCore.UnitOfWork
             this.disposed = true;
         }
 
+        // register generic repository
         public IGenericRepositoryV2<T> GetRepository<T>() where T : class
         {
             if (_repositories.ContainsKey(typeof(T)))

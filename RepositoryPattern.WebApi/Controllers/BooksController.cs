@@ -10,9 +10,11 @@ namespace RepositoryPattern.WebApi.Controllers
     public class BooksController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
-        public BooksController(IUnitOfWork unitOfWork)
+        private readonly IBookRepository _bookRepository;
+        public BooksController(IUnitOfWork unitOfWork, IBookRepository bookRepository)
         {
             _unitOfWork = unitOfWork;
+            _bookRepository = bookRepository;
         }
 
         [HttpGet]
@@ -44,12 +46,29 @@ namespace RepositoryPattern.WebApi.Controllers
         public IActionResult GetBooksV2()
         {
             var books = _unitOfWork.Books.GetAllAsQueryable().Select(books => new {
+                title = books.Title,
                 isbn = books.Isbn,
                 id = books.BookId,
                 price = books.Price,
                 publisherName = books.Publisher.Name,
                 authors = books.BookAuthorMaps.Select(map => map.Author.FirstName).ToList()
             }).ToList();
+            return Ok(books);
+        }
+
+        // endpoint using extended repository directly
+        [HttpGet]
+        [Route("GenericRepoWithExtention")]
+        public async Task<IActionResult> GetAllBooks()
+        {
+            var books = await _bookRepository.GetAllAsQueryable().Select(books => new {
+                title = books.Title,
+                isbn = books.Isbn,
+                id = books.BookId,
+                price = books.Price,
+                publisherName = books.Publisher.Name,
+                authors = books.BookAuthorMaps.Select(map => map.Author.FirstName).ToList()
+            }).ToListAsync();
             return Ok(books);
         }
     }

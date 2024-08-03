@@ -15,6 +15,11 @@ builder.Services.AddDbContext<EfRelationshipsContext>(options =>
 options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection"),
     b => b.MigrationsAssembly(typeof(EfRelationshipsContext).Assembly.FullName)));
+
+//builder.Services.AddDbContext<BikeStoresContext>(options =>
+//options.UseSqlServer(
+//    builder.Configuration.GetConnectionString("BikeStoresConnection"),
+//    b => b.MigrationsAssembly(typeof(BikeStoresContext).Assembly.FullName)));
 // db context
 
 #region Repositories
@@ -22,7 +27,8 @@ builder.Services.AddTransient(typeof(IGenericRepository<>), typeof(GenericReposi
 builder.Services.AddScoped(typeof(IGenericRepositoryV2<>), typeof(GenericRepositoryV2<>));
 builder.Services.AddTransient<IBookRepository, BookRepository>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<IUnitOfWorkV2, UnitOfWorkV2>();
+//builder.Services.AddScoped<IUnitOfWorkV2, UnitOfWorkV2>();
+builder.Services.AddTransient<IUnitOfWorkV2, UnitOfWorkV2<EfRelationshipsContext>>();
 #endregion
 
 #region cycle dependency resolver of json

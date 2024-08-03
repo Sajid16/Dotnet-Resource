@@ -10,13 +10,16 @@ namespace RepositoryPattern.DataAccess.EfCore.Repositories
 {
     public class GenericRepositoryV2<TEntity> : IGenericRepositoryV2<TEntity> where TEntity : class
     {
-        private readonly EfRelationshipsContext _context;
+        //private readonly EfRelationshipsContext _context;
+        private readonly DbContext _context;
         protected readonly DbSet<TEntity> _dbSet;
 
-        public GenericRepositoryV2(EfRelationshipsContext efRelationshipsContext)
+        //public GenericRepositoryV2(EfRelationshipsContext efRelationshipsContext)
+        public GenericRepositoryV2(DbContext dbContext)
         {
-            _dbSet = efRelationshipsContext.Set<TEntity>();
-            _context = efRelationshipsContext;
+            //_context = efRelationshipsContext;
+            _context = dbContext;
+            _dbSet = _context.Set<TEntity>();
         }
 
         public async Task AddAsync(TEntity entity)

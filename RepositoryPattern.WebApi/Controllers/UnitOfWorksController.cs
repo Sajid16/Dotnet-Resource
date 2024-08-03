@@ -101,5 +101,13 @@ namespace RepositoryPattern.WebApi.Controllers
             return Ok(response);
         }
 
+        [HttpGet]
+        [Route("get-from-extendedRepo")]
+        public IActionResult GetInfo(string title)
+        {
+            var response = _unitOfWorkV2.GetExtendedRepository<Book>().FindByCondition(book=> book.Title.Contains(title));
+            return Ok(response);
+        }
+
     }
 }
